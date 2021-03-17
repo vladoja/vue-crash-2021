@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker Vue" />
-    <AddTask />
+    <AddTask @add-task="addTask" />
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
   </div>
 </template>
@@ -24,6 +24,9 @@ export default {
     };
   },
   methods: {
+    addTask(task) {
+      this.tasks = [...this.tasks, task];
+    },
     deleteTask(id) {
       console.log("Deleting task: ", id);
       if (confirm("Are you sure ?")) {
