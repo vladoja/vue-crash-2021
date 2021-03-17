@@ -21,7 +21,10 @@ export default {
   },
   methods: {
     deleteTask(id) {
-      console.log("task: ", id);
+      console.log("Deleting task: ", id);
+      if (confirm("Are you sure ?")) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+      }
     }
   },
   created() {
