@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <Header @toggle-add-task="toggleShowAddTask" title="Task Tracker Vue" :showAddTask="showAddTask" />
+    <Header
+      @toggle-add-task="toggleShowAddTask"
+      title="Task Tracker Vue"
+      :showAddTask="showAddTask"
+    />
     <div v-if="showAddTask">
       <AddTask @add-task="addTask" />
     </div>
@@ -45,29 +49,16 @@ export default {
     },
     toggleShowAddTask() {
       this.showAddTask = !this.showAddTask;
+    },
+    async fetchTasks() {
+      const res = await fetch("http://localhost:5000/tasks");
+      const data = await res.json();
+
+      return data;
     }
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: "Doctors Appointment",
-        day: "March 21st  at 2:30pm",
-        reminder: true
-      },
-      {
-        id: 2,
-        text: "Cancel PZP",
-        day: "March 1st  at 1:30pm",
-        reminder: true
-      },
-      {
-        id: 3,
-        text: "Change tyres",
-        day: "April 1st  at 11:00pm",
-        reminder: false
-      }
-    ];
+  async created() {
+    this.tasks = await this.fetchTasks();
   }
 };
 </script>
