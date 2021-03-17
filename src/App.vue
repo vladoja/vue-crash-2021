@@ -32,8 +32,16 @@ export default {
     };
   },
   methods: {
-    addTask(task) {
-      this.tasks = [...this.tasks, task];
+    async addTask(task) {
+      const rest = await fetch('api/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(task),
+      })
+      const data = await rest.json();
+      this.tasks = [...this.tasks, data];
     },
     deleteTask(id) {
       console.log("Deleting task: ", id);
