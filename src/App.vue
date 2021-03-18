@@ -33,20 +33,25 @@ export default {
   },
   methods: {
     async addTask(task) {
-      const rest = await fetch('api/tasks', {
-        method: 'POST',
+      const rest = await fetch("api/tasks", {
+        method: "POST",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json"
         },
-        body: JSON.stringify(task),
-      })
+        body: JSON.stringify(task)
+      });
       const data = await rest.json();
       this.tasks = [...this.tasks, data];
     },
-    deleteTask(id) {
+    async deleteTask(id) {
       console.log("Deleting task: ", id);
       if (confirm("Are you sure ?")) {
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        const res = await fetch(`api/tasks/${id}`, {
+          method: "Delete"
+        });
+        res.status === 200
+          ? (this.tasks = this.tasks.filter(task => task.id !== id))
+          : alert("Error deleting task");
       }
     },
     toggleReminder(id) {
