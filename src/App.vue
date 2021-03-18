@@ -27,17 +27,6 @@ export default {
     };
   },
   methods: {
-    async addTask(task) {
-      const rest = await fetch("api/tasks", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify(task)
-      });
-      const data = await rest.json();
-      this.tasks = [...this.tasks, data];
-    },
     toggleShowAddTask() {
       this.showAddTask = !this.showAddTask;
     }

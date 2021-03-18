@@ -13,10 +13,10 @@
       "reminder": true
     },
     {
-      "id": 3,
-      "text": "Food shopping",
-      "day": "March 7th at 2:00pm",
-      "reminder": true
+      "text": "Kupit cheesecake",
+      "day": "Vecer",
+      "reminder": false,
+      "id": 3
     }
   ]
 }

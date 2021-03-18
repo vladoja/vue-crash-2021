@@ -14,7 +14,7 @@ import AddTask from "@/components/AddTask.vue";
 export default {
   name: "Home",
   props: {
-      showAddTask: Boolean,
+    showAddTask: Boolean
   },
   components: {
     Tasks,
@@ -26,6 +26,18 @@ export default {
     };
   },
   methods: {
+    async addTask(task) {
+      console.log("Adding task");
+      const rest = await fetch("api/tasks", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(task)
+      });
+      const data = await rest.json();
+      this.tasks = [...this.tasks, data];
+    },
     async deleteTask(id) {
       console.log("Deleting task: ", id);
       if (confirm("Are you sure ?")) {
